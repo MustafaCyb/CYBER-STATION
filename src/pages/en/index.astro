@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import PresentationCard from '../../components/PresentationCard.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { DynamicHero } from '../../components/ui/DynamicHero';
+import { getCollection } from 'astro:content';
+import { t } from '../../utils/i18n';
+
+const locale = 'en';
+
+const projects = (await getCollection('projects', (p) => p.data.locale === locale && !p.data.draft))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const presentations = (await getCollection('presentations', (p) => p.data.locale === locale))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const articles = (await getCollection('articles', (a) => a.data.locale === locale && !a.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
+const latestArticles = articles.slice(0, 3);
+const recentPresentations = presentations.filter(p => p.data.featured).slice(0, 3);
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="Home" locale={locale} description={t(locale, 'heroSubtitle')}>
+  <div class="container">
+    {/* ─── Hero ─── */}
+    <DynamicHero 
+      client:load 
+      title={t(locale, 'heroTitle')} 
+      subtitle={t(locale, 'heroSubtitle')}
+      exploreText={t(locale, 'exploreProjects')}
+      readText={t(locale, 'readArticles')}
+      exploreLink={`${base}${locale}/projects/`}
+      readLink={`${base}${locale}/articles/`}
+    />
+
+    {/* ─── Stats ─── */}
+    <section class="stats-bar fade-in-up delay-100">
+      <div class="stat-item">
+        <div class="stat-number">{projects.length}</div>
+        <div class="stat-label">{t(locale, 'projectsCount')}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{presentations.length}</div>
+        <div class="stat-label">{t(locale, 'presentationsCount')}</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{articles.length}</div>
+        <div class="stat-label">{t(locale, 'articlesCount')}</div>
+      </div>
+    </section>
+
+    {/* ─── Featured Projects ─── */}
+    {featuredProjects.length > 0 && (
+      <section style="margin-bottom: var(--space-4xl);" class="scroll-reveal">
+        <div class="section-header">
+          <h2 class="section-title"><span class="accent">#</span> {t(locale, 'featuredProjects')}</h2>
+          <a href={`${base}en/projects/`} class="btn btn-sm btn-ghost">{t(locale, 'allProjects')} →</a>
+        </div>
+        <div class="cards-grid scroll-reveal-stagger">
+          {featuredProjects.map(p => (
+            <ProjectCard
+              title={p.data.title}
+              description={p.data.description}
+              slug={p.data.itemSlug}
+              locale={locale}
+              category={p.data.category}
+              status={p.data.status}
+              tech={p.data.tech}
+              tags={p.data.tags}
+              repo={p.data.repo}
+              cover={p.data.cover}
+              safety={p.data.safety}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* ─── Latest Articles ─── */}
+    {latestArticles.length > 0 && (
+      <section style="margin-bottom: var(--space-4xl);" class="scroll-reveal">
+        <div class="section-header">
+          <h2 class="section-title"><span class="accent">#</span> {t(locale, 'latestArticles')}</h2>
+          <a href={`${base}en/articles/`} class="btn btn-sm btn-ghost">{t(locale, 'allArticles')} →</a>
+        </div>
+        <div class="cards-grid scroll-reveal-stagger">
+          {latestArticles.map(a => (
+            <ArticleCard
+              title={a.data.title}
+              description={a.data.description}
+              slug={a.data.itemSlug}
+              locale={locale}
+              date={a.data.date}
+              tags={a.data.tags}
+              cover={a.data.cover}
+              body={a.body ?? ''}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {/* ─── Recent Presentations ─── */}
+    {recentPresentations.length > 0 && (
+      <section style="margin-bottom: var(--space-4xl);" class="scroll-reveal">
+        <div class="section-header">
+          <h2 class="section-title"><span class="accent">#</span> {t(locale, 'recentPresentations')}</h2>
+          <a href={`${base}en/presentations/`} class="btn btn-sm btn-ghost">{t(locale, 'allPresentations')} →</a>
+        </div>
+        <div class="cards-grid scroll-reveal-stagger">
+          {recentPresentations.map(p => (
+            <PresentationCard
+              title={p.data.title}
+              description={p.data.description}
+              slug={p.data.itemSlug}
+              locale={locale}
+              sourceFolder={p.data.sourceFolder}
+              cover={p.data.cover}
+              tags={p.data.tags}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

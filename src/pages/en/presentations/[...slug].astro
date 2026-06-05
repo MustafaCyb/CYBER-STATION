@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TagList from '../../../components/TagList.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const presentations = await getCollection('presentations', (p) => p.data.locale === 'en');
+  return presentations.map(pres => ({
+    params: { slug: pres.data.itemSlug },
+    props: { pres },
+  }));
+}
+
+const { pres } = Astro.props;
+const { Content } = await pres.render();
+const locale = 'en';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title={pres.data.title} description={pres.data.description} locale={locale}>
+  <div class="container">
+    <article style="max-width: 800px; margin: 0 auto;">
+      {pres.data.cover && (
+        <div style="border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-2xl); border: 1px solid var(--glass-border);">
+          <img src={`${base}${pres.data.cover}`} alt={pres.data.title} style="width: 100%; height: 300px; object-fit: cover;" />
+        </div>
+      )}
+
+      <header style="margin-bottom: var(--space-2xl); padding-bottom: var(--space-xl); border-bottom: 1px solid var(--glass-border);">
+        <div style="display: flex; align-items: center; gap: var(--space-sm); margin-bottom: var(--space-md);">
+          <span class="card-category">{pres.data.category}</span>
+
+        </div>
+        <h1 class="page-title">{pres.data.title}</h1>
+        <p class="page-subtitle">{pres.data.description}</p>
+
+        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); flex-wrap: wrap;">
+          {pres.data.sourceFolder && (
+            <a href={pres.data.sourceFolder} target="_blank" rel="noopener" class="btn btn-primary">
+              {t(locale, 'viewSlides')} →
+            </a>
+          )}
+          <a href={`${base}en/presentations/`} class="btn btn-ghost">← {t(locale, 'allPresentations')}</a>
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      {pres.data.tags.length > 0 && (
+        <div style="margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--glass-border);">
+          <TagList tags={pres.data.tags} locale={locale} />
+        </div>
+      )}
+    </article>
+  </div>
+</BaseLayout>

@@ -1,0 +1,6 @@
+assets/
+to_do
+node_modules/
+dist/
+.env
+logs/

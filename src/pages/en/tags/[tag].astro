@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import PresentationCard from '../../../components/PresentationCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const locale = 'en';
+  const projects = await getCollection('projects', (p) => p.data.locale === locale);
+  const articles = await getCollection('articles', (a) => a.data.locale === locale && !a.data.draft);
+  const presentations = await getCollection('presentations', (p) => p.data.locale === locale);
+
+  const allTags = new Set<string>();
+  [...projects, ...articles, ...presentations].forEach(item => {
+    item.data.tags.forEach((tag: string) => allTags.add(tag));
+  });
+
+  return [...allTags].map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      taggedProjects: projects.filter(p => p.data.tags.includes(tag)),
+      taggedArticles: articles.filter(a => a.data.tags.includes(tag)),
+      taggedPresentations: presentations.filter(p => p.data.tags.includes(tag)),
+    },
+  }));
+}
+
+const { tag, taggedProjects, taggedArticles, taggedPresentations } = Astro.props;
+const locale = 'en';
+---
+<BaseLayout title={`#${tag}`} locale={locale} description={`Content tagged with #${tag}`}>
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">#{tag}</span></h1>
+      <p class="page-subtitle">{t(locale, 'taggedWith')} <strong>#{tag}</strong></p>
+    </header>
+
+    {taggedProjects.length > 0 && (
+      <section style="margin-bottom: var(--space-3xl);">
+        <h2 class="section-title" style="margin-bottom: var(--space-lg);"><span class="accent">#</span> {t(locale, 'projects')}</h2>
+        <div class="cards-grid">
+          {taggedProjects.map((p) => (
+            <ProjectCard title={p.data.title} description={p.data.description} slug={p.data.itemSlug} locale={locale} category={p.data.category} status={p.data.status} tech={p.data.tech} tags={p.data.tags} repo={p.data.repo} cover={p.data.cover} safety={p.data.safety} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {taggedArticles.length > 0 && (
+      <section style="margin-bottom: var(--space-3xl);">
+        <h2 class="section-title" style="margin-bottom: var(--space-lg);"><span class="accent">#</span> {t(locale, 'articles')}</h2>
+        <div class="cards-grid">
+          {taggedArticles.map((a) => (
+            <ArticleCard title={a.data.title} description={a.data.description} slug={a.data.itemSlug} locale={locale} date={a.data.date} tags={a.data.tags} cover={a.data.cover} body={a.body ?? ''} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {taggedPresentations.length > 0 && (
+      <section style="margin-bottom: var(--space-3xl);">
+        <h2 class="section-title" style="margin-bottom: var(--space-lg);"><span class="accent">#</span> {t(locale, 'presentations')}</h2>
+        <div class="cards-grid">
+          {taggedPresentations.map((p) => (
+            <PresentationCard title={p.data.title} description={p.data.description} slug={p.data.itemSlug} locale={locale} session={p.data.session} sourceFolder={p.data.sourceFolder} cover={p.data.cover} tags={p.data.tags} />
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>

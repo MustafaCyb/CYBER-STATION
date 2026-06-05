@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+const locale = 'ar';
+const articles = (await getCollection('articles', (a) => a.data.locale === locale && !a.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const allTags = [...new Set(articles.flatMap(a => a.data.tags))].sort();
+---
+<BaseLayout title={t(locale, 'allArticles')} locale={locale} description="مقالات ودروس وأبحاث في الأمن السيبراني.">
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">{t(locale, 'allArticles')}</span></h1>
+      <p class="page-subtitle">مقالات معمقة في الأمن السيبراني والطب الشرعي الرقمي وتطوير أدوات الأمان.</p>
+    </header>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-chip active" data-tag="all">{t(locale, 'filterAll')}</button>
+      {allTags.map(tag => <button class="filter-chip" data-tag={tag}>#{tag}</button>)}
+    </div>
+    <div class="cards-grid scroll-reveal-stagger" id="articles-grid">
+      {articles.map(a => <ArticleCard title={a.data.title} description={a.data.description} slug={a.data.itemSlug} locale={locale} date={a.data.date} tags={a.data.tags} cover={a.data.cover} body={a.body ?? ''} />)}
+    </div>
+  </div>
+  <script is:inline>
+  (function(){const c=document.querySelectorAll('#filter-bar .filter-chip'),d=document.querySelectorAll('#articles-grid .glass-card');c.forEach(b=>{b.addEventListener('click',()=>{c.forEach(a=>a.classList.remove('active'));b.classList.add('active');const t=b.getAttribute('data-tag');d.forEach(a=>{const tags=(a.getAttribute('data-tags')||'').split(',');a.style.display=(t==='all'||tags.includes(t))?'':'none'})})})})();
+  </script>
+</BaseLayout>

@@ -1,0 +1,91 @@
+---
+import { t } from '../utils/i18n';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale: string;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const navItems = [
+  { key: 'home', href: `${base}${locale}/` },
+  { key: 'articles', href: `${base}${locale}/articles/` },
+  { key: 'projects', href: `${base}${locale}/projects/` },
+  { key: 'presentations', href: `${base}${locale}/presentations/` },
+  { key: 'about', href: `${base}${locale}/about/` },
+];
+
+function isActive(href: string): boolean {
+  const normalized = currentPath.replace(/\/$/, '');
+  const normalizedHref = href.replace(/\/$/, '');
+  if (normalizedHref === `${base}${locale}`) {
+    return normalized === normalizedHref;
+  }
+  return normalized.startsWith(normalizedHref);
+}
+---
+<nav class="nav-bar" id="navbar">
+  <div class="nav-inner">
+    <a href={`${base}${locale}/`} class="nav-logo">
+      <span class="bracket">&lt;</span> CYBER STATION <span class="slash">/</span><span class="bracket">&gt;</span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
+    <ul class="nav-links" id="nav-links">
+      {navItems.map(item => (
+        <li>
+          <a href={item.href} class:list={[{ active: isActive(item.href) }]}>
+            {t(locale, item.key)}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="nav-actions">
+      <LanguageSwitcher locale={locale} currentPath={currentPath} />
+      <ThemeToggle />
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+(function() {
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  const navbar = document.getElementById('navbar');
+  if (!toggle || !links) return;
+  
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  // Close on link click (mobile)
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+
+  // Scroll active navbar glass class
+  if (navbar) {
+    const checkScroll = () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    };
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll(); // Check on init
+  }
+})();
+</script>

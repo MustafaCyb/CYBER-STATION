@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+const locale = 'en';
+const articles = (await getCollection('articles', (a) => a.data.locale === locale && !a.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const allTags = [...new Set(articles.flatMap(a => a.data.tags))].sort();
+---
+<BaseLayout title={t(locale, 'allArticles')} locale={locale} description="Cybersecurity articles, tutorials, and research from Cyber Station.">
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">{t(locale, 'allArticles')}</span></h1>
+      <p class="page-subtitle">In-depth articles on cybersecurity, digital forensics, and security tool development.</p>
+    </header>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-chip active" data-tag="all">{t(locale, 'filterAll')}</button>
+      {allTags.map(tag => (
+        <button class="filter-chip" data-tag={tag}>#{tag}</button>
+      ))}
+    </div>
+
+    <div class="cards-grid scroll-reveal-stagger" id="articles-grid">
+      {articles.map(a => (
+        <ArticleCard
+          title={a.data.title}
+          description={a.data.description}
+          slug={a.data.itemSlug}
+          locale={locale}
+          date={a.data.date}
+          tags={a.data.tags}
+          cover={a.data.cover}
+          body={a.body ?? ''}
+        />
+      ))}
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    const chips = document.querySelectorAll('#filter-bar .filter-chip');
+    const cards = document.querySelectorAll('#articles-grid .glass-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const tag = chip.getAttribute('data-tag');
+        cards.forEach(card => {
+          const tags = (card.getAttribute('data-tags') || '').split(',');
+          card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+        });
+      });
+    });
+  })();
+  </script>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+const locale = 'ar';
+const base = import.meta.env.BASE_URL;
+
+const projects = await getCollection('projects', (p) => p.data.locale === locale);
+const articles = await getCollection('articles', (a) => a.data.locale === locale && !a.data.draft);
+const presentations = await getCollection('presentations', (p) => p.data.locale === locale);
+
+const tagCounts: Record<string, number> = {};
+[...projects, ...articles, ...presentations].forEach(item => {
+  item.data.tags.forEach((tag: string) => { tagCounts[tag] = (tagCounts[tag] || 0) + 1; });
+});
+const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+---
+<BaseLayout title={t(locale, 'allTags')} locale={locale} description="تصفح جميع الوسوم.">
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">{t(locale, 'allTags')}</span></h1>
+      <p class="page-subtitle">تصفح المحتوى حسب الوسوم الموضوعية عبر جميع الأقسام.</p>
+    </header>
+    <div class="tag-list" style="gap: var(--space-md);">
+      {sortedTags.map(([tag, count]) => (
+        <a href={`${base}ar/tags/${tag}/`} class="tag-chip" style="font-size: 0.9rem; padding: 0.4rem 1rem;">
+          #{tag} <span style="color: var(--text-3); margin-right: 0.3rem;">({count})</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

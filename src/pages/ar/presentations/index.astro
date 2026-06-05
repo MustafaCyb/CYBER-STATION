@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PresentationCard from '../../../components/PresentationCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+const locale = 'ar';
+const presentations = (await getCollection('presentations', (p) => p.data.locale === locale))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+<BaseLayout title={t(locale, 'allPresentations')} locale={locale} description="العروض التقديمية في الأمن السيبراني.">
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">{t(locale, 'allPresentations')}</span></h1>
+      <p class="page-subtitle">شرائح محاضرات تغطي أساسيات الأمن السيبراني والتقنيات الهجومية واستراتيجيات الدفاع.</p>
+    </header>
+    <div class="cards-grid scroll-reveal-stagger">
+      {presentations.map(p => <PresentationCard title={p.data.title} description={p.data.description} slug={p.data.itemSlug} locale={locale} sourceFolder={p.data.sourceFolder} cover={p.data.cover} tags={p.data.tags} />)}
+    </div>
+  </div>
+</BaseLayout>

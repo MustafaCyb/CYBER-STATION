@@ -1,0 +1,122 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StarCanvas from '../components/StarCanvas.astro';
+import CursorGlow from '../components/CursorGlow.astro';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description?: string | undefined;
+  locale?: string | undefined;
+  ogImage?: string | undefined;
+  canonicalUrl?: string | undefined;
+}
+
+const {
+  title,
+  description = 'Cybersecurity research hub — tools, articles, and lecture presentations.',
+  locale = 'en',
+  ogImage,
+  canonicalUrl,
+} = Astro.props;
+
+const dir = locale === 'ar' ? 'rtl' : 'ltr';
+const fullTitle = `${title} | CYBER STATION`;
+const siteUrl = 'https://mustafacyb.github.io/CYBER-STATION';
+const canonical = canonicalUrl ?? Astro.url.href;
+const altLocale = locale === 'en' ? 'ar' : 'en';
+const altHref = Astro.url.pathname.replace(`/${locale}/`, `/${altLocale}/`);
+---
+<!DOCTYPE html>
+<html lang={locale} dir={dir} data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <ViewTransitions />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';" />
+
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+
+  <!-- Canonical & Alternate -->
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang={locale} href={canonical} />
+  <link rel="alternate" hreflang={altLocale} href={`${siteUrl}${altHref}`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:locale" content={locale === 'ar' ? 'ar_SA' : 'en_US'} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Theme Script (prevent flash) -->
+  <script is:inline>
+    (function() {
+      const t = localStorage.getItem('cs-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+      else if (window.matchMedia('(prefers-color-scheme: light)').matches)
+        document.documentElement.setAttribute('data-theme', 'light');
+    })();
+  </script>
+
+  <!-- Anti-Tamper Security Script -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const logo = document.querySelector('.nav-logo');
+      const footerCopy = document.querySelector('.footer-copy');
+
+      if (logo || footerCopy) {
+        const observer = new MutationObserver(() => {
+          observer.disconnect();
+
+          if (logo && logo.textContent.replace(/\s+/g, ' ').trim() !== '< CYBER STATION />') {
+            logo.innerHTML = '<span class="bracket">&lt;</span> CYBER STATION <span class="slash">/</span><span class="bracket">&gt;</span>';
+            console.warn('[Security] Unauthorized DOM manipulation detected and reverted.');
+          }
+
+          if (footerCopy && !footerCopy.textContent.includes('CYBER STATION')) {
+            const currentYear = new Date().getFullYear();
+            footerCopy.innerHTML = `&copy; ${currentYear} CYBER STATION`;
+            console.warn('[Security] Unauthorized DOM manipulation detected and reverted.');
+          }
+
+          observe();
+        });
+
+        function observe() {
+          if (logo) observer.observe(logo, { childList: true, characterData: true, subtree: true });
+          if (footerCopy) observer.observe(footerCopy, { childList: true, characterData: true, subtree: true });
+        }
+
+        observe();
+      }
+    });
+  </script>
+</head>
+<body>
+  <StarCanvas />
+  <div class="site-wrapper">
+    <Header locale={locale} currentPath={Astro.url.pathname} />
+    <main class="main-content">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+  </div>
+  <CursorGlow />
+</body>
+</html>

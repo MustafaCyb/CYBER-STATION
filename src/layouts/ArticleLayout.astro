@@ -1,0 +1,76 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { formatDate, getReadingTime } from '../utils/reading-time';
+import { t } from '../utils/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: string;
+  date: Date;
+  updated?: Date;
+  tags?: string[];
+  category?: string;
+  cover?: string;
+  body: string;
+}
+
+const { title, description, locale, date, updated, tags = [], category, cover, body } = Astro.props;
+const readTime = getReadingTime(body);
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title={title} description={description} locale={locale} ogImage={cover ? `${base}${cover}` : undefined}>
+  {/* Reading progress bar */}
+  <div class="reading-progress" id="reading-progress"></div>
+
+  <div class="container">
+    <article>
+      <header class="article-header">
+        {category && <div class="card-category">{category}</div>}
+        <h1 class="page-title">{title}</h1>
+        <div class="article-meta">
+          <time datetime={date.toISOString()}>{formatDate(date, locale)}</time>
+          <span class="separator"></span>
+          <span>{readTime} {t(locale, 'minRead')}</span>
+          {updated && (
+            <>
+              <span class="separator"></span>
+              <span>Updated: {formatDate(updated, locale)}</span>
+            </>
+          )}
+        </div>
+        {tags.length > 0 && (
+          <div class="tag-list" style="justify-content: center; margin-top: var(--space-md);">
+            {tags.map((tag) => (
+              <a href={`${base}${locale}/tags/${tag}/`} class="tag-chip">#{tag}</a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {cover && (
+        <div class="article-cover-wrap" style="margin-bottom: var(--space-2xl); border-radius: var(--radius-lg); overflow: hidden;">
+          <img src={`${base}${cover}`} alt={title} class="card-cover" style="height: 360px; width: 100%;" />
+        </div>
+      )}
+
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </div>
+
+  <script is:inline>
+    (function() {
+      const bar = document.getElementById('reading-progress');
+      if (!bar) return;
+      function update() {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+        bar.style.width = pct + '%';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+  </script>
+</BaseLayout>

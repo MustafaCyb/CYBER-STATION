@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../utils/i18n';
+
+const locale = 'en';
+const projects = (await getCollection('projects', (p) => p.data.locale === locale && !p.data.draft))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const allTags = [...new Set(projects.flatMap(p => p.data.tags))].sort();
+---
+<BaseLayout title={t(locale, 'allProjects')} locale={locale} description="All cybersecurity projects built by Cyber Station.">
+  <div class="container">
+    <header style="margin-bottom: var(--space-2xl);">
+      <h1 class="page-title"><span class="gradient-text">{t(locale, 'allProjects')}</span></h1>
+      <p class="page-subtitle">Open-source cybersecurity tools, frameworks, and educational resources.</p>
+    </header>
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-chip active" data-tag="all">{t(locale, 'filterAll')}</button>
+      {allTags.map(tag => (
+        <button class="filter-chip" data-tag={tag}>#{tag}</button>
+      ))}
+    </div>
+
+    <div class="cards-grid scroll-reveal-stagger" id="projects-grid">
+      {projects.map(p => (
+        <ProjectCard
+          title={p.data.title}
+          description={p.data.description}
+          slug={p.data.itemSlug}
+          locale={locale}
+          category={p.data.category}
+          status={p.data.status}
+          tech={p.data.tech}
+          tags={p.data.tags}
+          repo={p.data.repo}
+          cover={p.data.cover}
+          safety={p.data.safety}
+        />
+      ))}
+    </div>
+  </div>
+
+  <script is:inline>
+  (function() {
+    const chips = document.querySelectorAll('#filter-bar .filter-chip');
+    const cards = document.querySelectorAll('#projects-grid .glass-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const tag = chip.getAttribute('data-tag');
+        cards.forEach(card => {
+          const tags = (card.getAttribute('data-tags') || '').split(',');
+          card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+        });
+      });
+    });
+  })();
+  </script>
+</BaseLayout>

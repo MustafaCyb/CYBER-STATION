@@ -1,0 +1,19 @@
+---
+import { t, getAlternatePath } from '../utils/i18n';
+
+interface Props {
+  locale: string;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const altLocale = locale === 'en' ? 'ar' : 'en';
+const altPath = getAlternatePath(currentPath, altLocale);
+---
+<a href={altPath} class="lang-switch" title={t(locale, 'switchLang')}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"></path>
+  </svg>
+  <span>{t(locale, 'switchLang')}</span>
+</a>
