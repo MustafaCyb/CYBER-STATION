@@ -34,14 +34,6 @@ function isActive(href: string): boolean {
       <span class="bracket">&lt;</span> CYBER STATION <span class="slash">/</span><span class="bracket">&gt;</span>
     </a>
 
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
-    </button>
-
     <ul class="nav-links" id="nav-links">
       {navItems.map(item => (
         <li>
@@ -52,9 +44,19 @@ function isActive(href: string): boolean {
       ))}
     </ul>
 
-    <div class="nav-actions">
-      <LanguageSwitcher locale={locale} currentPath={currentPath} />
-      <ThemeToggle />
+    <div class="nav-controls">
+      <div class="nav-actions">
+        <LanguageSwitcher locale={locale} currentPath={currentPath} />
+        <ThemeToggle />
+      </div>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
