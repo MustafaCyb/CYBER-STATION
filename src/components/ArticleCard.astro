@@ -40,7 +40,7 @@ const readTime = getReadingTime(body);
       <span>·</span>
       <span>{readTime} {t(locale, 'minRead')}</span>
     </div>
-    <h3 class="card-title"><a href={href}>{title}</a></h3>
+    <h3 class="card-title"><a href={href} class="full-card-link">{title}</a></h3>
     <p class="card-desc">{description}</p>
     {tags.length > 0 && (
       <div class="tag-list">

@@ -1,7 +1,7 @@
 ---
 // Galaxy star field canvas — animated background
 ---
-<div class="space-background" aria-hidden="true">
+<div class="space-background" aria-hidden="true" transition:persist>
   <div class="nebula-blob blob-1"></div>
   <div class="nebula-blob blob-2"></div>
   <div class="nebula-blob blob-3"></div>
@@ -104,6 +104,9 @@
 
 <script is:inline>
 (function() {
+  if (window.__STAR_CANVAS_INITIALIZED__) return;
+  window.__STAR_CANVAS_INITIALIZED__ = true;
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     return;
   }

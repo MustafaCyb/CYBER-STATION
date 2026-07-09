@@ -24,7 +24,7 @@ const href = `${base}${locale}/projects/${slug}/`;
   {cover && <img src={`${base}${cover}`} alt={title} class="card-cover" loading="lazy" />}
   <div class="card-body">
     {category && <div class="card-category">{category}</div>}
-    <h3 class="card-title"><a href={href}>{title}</a></h3>
+    <h3 class="card-title"><a href={href} class="full-card-link">{title}</a></h3>
     <p class="card-desc">{description}</p>
 
     {tech.length > 0 && (

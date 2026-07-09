@@ -15,17 +15,25 @@
 
 <script is:inline>
 (function() {
-  const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
+  function initThemeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
 
-  function apply(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('cs-theme', theme);
+    // Clone to remove any existing event listeners (prevents duplicate bindings)
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+
+    function apply(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('cs-theme', theme);
+    }
+
+    newBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      apply(current === 'dark' ? 'light' : 'dark');
+    });
   }
 
-  btn.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    apply(current === 'dark' ? 'light' : 'dark');
-  });
+  document.addEventListener('astro:page-load', initThemeToggle);
 })();
 </script>

@@ -180,6 +180,7 @@ body {
   color: var(--text-1);
   overflow-x: hidden;
   position: relative;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
 }
 
 [lang="ar"] body,
@@ -400,6 +401,11 @@ a:hover { color: var(--text-link-hover); }
   animation: btnGlow 1.5s infinite alternate;
   color: #fff;
 }
+.btn-primary:active {
+  transform: translateY(1px);
+  animation: none;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
 
 .btn-ghost {
   background: var(--glass-bg);
@@ -414,6 +420,10 @@ a:hover { color: var(--text-link-hover); }
   color: var(--text-1);
   transform: translateY(-2px);
   box-shadow: inset 0 1px 0 var(--glass-highlight), var(--btn-glow);
+}
+.btn-ghost:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
 .btn-sm {
@@ -717,6 +727,24 @@ a:hover { color: var(--text-link-hover); }
 }
 .card-title a:hover { color: var(--accent-purple); }
 
+.full-card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Ensure interactive elements inside the card stay above the full card link */
+.glass-card .tag-chip,
+.glass-card .btn,
+.glass-card .tech-badge,
+.glass-card .status-pill,
+.glass-card .safety-label,
+.glass-card .card-meta a {
+  position: relative;
+  z-index: 2;
+}
+
 .card-desc {
   font-size: 0.9rem;
   color: var(--text-2);
@@ -908,11 +936,22 @@ a:hover { color: var(--text-link-hover); }
   font-weight: 700;
   margin: var(--space-3xl) 0 var(--space-md);
   letter-spacing: -0.02em;
+  scroll-margin-top: calc(var(--nav-height) + var(--space-lg));
+  transition: color var(--transition-base), text-shadow var(--transition-base);
+}
+.prose h2:hover {
+  color: var(--accent-cyan);
+  text-shadow: var(--glow-cyan);
 }
 .prose h3 {
   font-size: 1.2rem;
   font-weight: 600;
   margin: var(--space-2xl) 0 var(--space-md);
+  scroll-margin-top: calc(var(--nav-height) + var(--space-lg));
+  transition: color var(--transition-base);
+}
+.prose h3:hover {
+  color: var(--accent-purple);
 }
 
 .prose p { margin-bottom: var(--space-lg); }
@@ -1003,6 +1042,12 @@ a:hover { color: var(--text-link-hover); }
   border: 1px solid var(--glass-border);
   margin: var(--space-xl) 0;
   box-shadow: var(--shadow-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  cursor: zoom-in;
+}
+.prose img:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg), var(--glow-purple);
 }
 
 /* ─── Article Header ─── */
@@ -1086,9 +1131,27 @@ a:hover { color: var(--text-link-hover); }
 
 /* ─── Footer ─── */
 .site-footer {
-  border-top: 1px solid var(--glass-border);
+  position: relative;
   padding: var(--space-2xl) 0;
   text-align: center;
+  border-top: 1px solid transparent;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-hero);
+  opacity: 0.7;
+  animation: footerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes footerGlow {
+  from { opacity: 0.5; box-shadow: 0 0 10px rgba(124, 58, 237, 0.3); }
+  to { opacity: 1; box-shadow: 0 0 20px rgba(124, 58, 237, 0.6), 0 0 10px rgba(6, 182, 212, 0.4); }
 }
 
 .footer-inner {
@@ -1151,10 +1214,12 @@ a:hover { color: var(--text-link-hover); }
   position: fixed;
   top: var(--nav-height);
   left: 0;
-  height: 2px;
+  height: 3px;
   background: var(--gradient-hero);
   z-index: 99;
   transition: width 50ms linear;
+  box-shadow: 0 0 10px rgba(124, 58, 237, 0.8), 0 0 20px rgba(6, 182, 212, 0.6);
+  border-radius: 0 2px 2px 0;
 }
 
 /* ─── Filter Bar ─── */
@@ -1201,7 +1266,19 @@ a:hover { color: var(--text-link-hover); }
 .empty-state .icon { font-size: 3rem; margin-bottom: var(--space-md); }
 
 /* ─── RTL Overrides ─── */
-
+[lang="ar"] .prose,
+[dir="rtl"] .prose {
+  line-height: 2;
+  font-size: 1.1rem;
+}
+[lang="ar"] .prose h2,
+[dir="rtl"] .prose h2 {
+  font-size: 1.6rem;
+}
+[lang="ar"] .prose h3,
+[dir="rtl"] .prose h3 {
+  font-size: 1.3rem;
+}
 /* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1268,7 +1345,7 @@ a:hover { color: var(--text-link-hover); }
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -1277,7 +1354,7 @@ a:hover { color: var(--text-link-hover); }
 }
 
 .fade-in-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .delay-100 { animation-delay: 100ms; }

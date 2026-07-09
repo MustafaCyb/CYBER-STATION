@@ -159,6 +159,20 @@ declare module 'astro:content' {
   collection: "articles";
   data: any
 } & { render(): Render[".md"] };
+"ar/malware-development-concepts.md": {
+	id: "ar/malware-development-concepts.md";
+  slug: "ar/malware-development-concepts";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"ar/malware-packers.md": {
+	id: "ar/malware-packers.md";
+  slug: "ar/malware-packers";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
 "ar/real-time-phishing-agents.md": {
 	id: "ar/real-time-phishing-agents.md";
   slug: "ar/real-time-phishing-agents";
@@ -169,6 +183,20 @@ declare module 'astro:content' {
 "en/game-anti-cheats.md": {
 	id: "en/game-anti-cheats.md";
   slug: "en/game-anti-cheats";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"en/malware-development-concepts.md": {
+	id: "en/malware-development-concepts.md";
+  slug: "en/malware-development-concepts";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"en/malware-packers.md": {
+	id: "en/malware-packers.md";
+  slug: "en/malware-packers";
   body: string;
   collection: "articles";
   data: any
