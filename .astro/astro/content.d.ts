@@ -173,6 +173,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: any
 } & { render(): Render[".md"] };
+"ar/pagefile-deleted-contact-dfir.md": {
+	id: "ar/pagefile-deleted-contact-dfir.md";
+  slug: "ar/pagefile-deleted-contact-dfir";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
 "ar/real-time-phishing-agents.md": {
 	id: "ar/real-time-phishing-agents.md";
   slug: "ar/real-time-phishing-agents";
@@ -197,6 +204,13 @@ declare module 'astro:content' {
 "en/malware-packers.md": {
 	id: "en/malware-packers.md";
   slug: "en/malware-packers";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"en/pagefile-deleted-contact-dfir.md": {
+	id: "en/pagefile-deleted-contact-dfir.md";
+  slug: "en/pagefile-deleted-contact-dfir";
   body: string;
   collection: "articles";
   data: any
