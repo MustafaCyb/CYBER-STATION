@@ -20,11 +20,11 @@ const href = `${base}${locale}/articles/${slug}/`;
 const readTime = getReadingTime(body);
 ---
 <InteractiveCard client:visible id={`article-${slug}`} data-tags={tags.join(',')}>
-  <div class="article-cover-wrap">
+  <div class="card-cover-wrap">
     {cover && <img src={`${base}${cover}`} alt={title} class="card-cover" loading="lazy" />}
     {!cover && (
-      <div class="card-cover" style="background: var(--gradient-card); display: flex; align-items: center; justify-content: center;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 4rem; height: 4rem; opacity: 0.4; color: var(--accent-purple);">
+      <div class="card-cover card-cover-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="card-placeholder-icon">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
           <polyline points="14 2 14 8 20 8"></polyline>
           <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -33,21 +33,27 @@ const readTime = getReadingTime(body);
         </svg>
       </div>
     )}
+    <div class="card-cover-overlay"></div>
+    <div class="card-floating-badge">{locale === 'ar' ? 'مقال تحليلي' : 'Article'}</div>
   </div>
   <div class="card-body">
-    <div class="card-meta" style="margin-bottom: var(--space-sm);">
+    <div class="card-meta">
       <time datetime={date.toISOString()}>{formatDate(date, locale)}</time>
       <span>·</span>
       <span>{readTime} {t(locale, 'minRead')}</span>
     </div>
     <h3 class="card-title"><a href={href} class="full-card-link">{title}</a></h3>
     <p class="card-desc">{description}</p>
-    {tags.length > 0 && (
-      <div class="tag-list">
-        {tags.slice(0, 4).map((tag) => (
-          <a href={`${base}${locale}/tags/${tag}/`} class="tag-chip">#{tag}</a>
-        ))}
-      </div>
-    )}
+  </div>
+  <div class="card-footer">
+    <div class="tag-list">
+      {tags.slice(0, 3).map((tag) => (
+        <a href={`${base}${locale}/tags/${tag}/`} class="tag-chip">#{tag}</a>
+      ))}
+    </div>
+    <a href={href} class="card-action-link" title={title}>
+      <span>{locale === 'ar' ? 'قراءة' : 'Read'}</span>
+      <span class="card-arrow-icon">{locale === 'ar' ? '←' : '→'}</span>
+    </a>
   </div>
 </InteractiveCard>

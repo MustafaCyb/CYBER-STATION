@@ -152,6 +152,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"articles": {
+"ar/digipi-memory-forensics-platform.md": {
+	id: "ar/digipi-memory-forensics-platform.md";
+  slug: "ar/digipi-memory-forensics-platform";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
 "ar/game-anti-cheats.md": {
 	id: "ar/game-anti-cheats.md";
   slug: "ar/game-anti-cheats";
@@ -183,6 +190,13 @@ declare module 'astro:content' {
 "ar/real-time-phishing-agents.md": {
 	id: "ar/real-time-phishing-agents.md";
   slug: "ar/real-time-phishing-agents";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"en/digipi-memory-forensics-platform.md": {
+	id: "en/digipi-memory-forensics-platform.md";
+  slug: "en/digipi-memory-forensics-platform";
   body: string;
   collection: "articles";
   data: any
