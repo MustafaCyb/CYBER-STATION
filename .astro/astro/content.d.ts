@@ -166,6 +166,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: any
 } & { render(): Render[".md"] };
+"ar/iraq-cyber-threat-actors-2026.md": {
+	id: "ar/iraq-cyber-threat-actors-2026.md";
+  slug: "ar/iraq-cyber-threat-actors-2026";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
 "ar/malware-development-concepts.md": {
 	id: "ar/malware-development-concepts.md";
   slug: "ar/malware-development-concepts";
@@ -204,6 +211,13 @@ declare module 'astro:content' {
 "en/game-anti-cheats.md": {
 	id: "en/game-anti-cheats.md";
   slug: "en/game-anti-cheats";
+  body: string;
+  collection: "articles";
+  data: any
+} & { render(): Render[".md"] };
+"en/iraq-cyber-threat-actors-2026.md": {
+	id: "en/iraq-cyber-threat-actors-2026.md";
+  slug: "en/iraq-cyber-threat-actors-2026";
   body: string;
   collection: "articles";
   data: any
