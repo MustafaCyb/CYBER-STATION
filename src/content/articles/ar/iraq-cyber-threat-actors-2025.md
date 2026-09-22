@@ -1,23 +1,23 @@
 ---
 title: "جدار الحماية المخترق: حقيقة الهجمات السيبرانية والتسريبات الكبرى في العراق"
-description: "توثيق استخباراتي وتحليلي شامل لسلسلة الهجمات السيبرانية والتسريبات الضخمة التي استهدفت المؤسسات والبنى الرقمية في العراق بين 15 و20 أيلول 2026، كاشفةً الثغرات التقنية وحجم الأضرار ومستقبل الأمن السيبراني."
+description: "توثيق استخباراتي وتحليلي شامل لسلسلة الهجمات السيبرانية والتسريبات الضخمة التي استهدفت المؤسسات والبنى الرقمية في العراق بين 15 و20 أيلول 2025، كاشفةً الثغرات التقنية وحجم الأضرار ومستقبل الأمن السيبراني."
 locale: "ar"
-itemSlug: "iraq-cyber-threat-actors-2026"
-date: 2026-09-20
+itemSlug: "iraq-cyber-threat-actors-2025"
+date: 2025-09-20
 tags: ["threat-intelligence", "iraq", "cyber-attacks", "incident-response", "data-leak", "s4ud1pwnz", "cyb3r-drag0nz"]
 category: "استخبارات التهديدات"
 featured: true
-cover: "images/articles/iraq-cyber-threat-actors-2026/cover.jpg"
+cover: "images/articles/iraq-cyber-threat-actors-2025/cover.jpg"
 images:
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_759@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_759@21-09-2025_22-32-18.jpg"
     alt: "الهجوم السيبراني على العراق - S4UD1PWNZ و CYB3R DRAG0NZ"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_760@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_760@21-09-2025_22-32-18.jpg"
     alt: "لماذا حصل هذا الهجوم وأسبابه"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_761@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_761@21-09-2025_22-32-18.jpg"
     alt: "الأسباب التقنية والرد العراقي"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_762@21-09-2026_22-32-19.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_762@21-09-2025_22-32-19.jpg"
     alt: "نطاق الاختراق ومستوى الأضرار"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_763@21-09-2026_22-32-19.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_763@21-09-2025_22-32-19.jpg"
     alt: "مستقبل مجال الأمن السيبراني بالعراق"
 ---
 
@@ -25,7 +25,7 @@ images:
 
 | المعيار | التفاصيل |
 | :--- | :--- |
-| **فترة الهجمات** | **15 أيلول (سبتمبر) 2026 — 20 أيلول (سبتمبر) 2026** |
+| **فترة الهجمات** | **15 أيلول (سبتمبر) 2025 — 20 أيلول (سبتمبر) 2025** |
 | **الجهات المهاجمة (Threat Actors)** | تحالف فريقي **S4uD1PWNZ** و **CYB3R DRAG0NZ** |
 | **نوع العمليات** | اختراق أنظمة مراقبة الحركة، استيلاء على النطاقات (Domain Takeover)، تسريب قواعد بيانات حساسة، واختراق صناديق بريد حكومية |
 | **أبرز الأهداف المتأثرة** | نظام PRTG الوطني، مجلس النواب العراقي، مجلس محافظة كركوك، جامعات حكومية وأهلية، نقابة المهندسين بالبصرة |
@@ -35,7 +35,7 @@ images:
 
 ## 1. ماذا حصل ب الأيام السابقة؟
 
-![الهجوم السيبراني على العراق - S4UD1PWNZ و CYB3R DRAG0NZ](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_759@21-09-2026_22-32-18.jpg)
+![الهجوم السيبراني على العراق - S4UD1PWNZ و CYB3R DRAG0NZ](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_759@21-09-2025_22-32-18.jpg)
 
 تعرض العراق لهجمات رقمية مدمرة استهدفت مواقع وأنظمة حساسة ب الدولة من قبل فريقين حسب ما يقال عنهم انهم مجرمين رقميين .
 
@@ -55,7 +55,7 @@ images:
 
 ## 2. لماذا حصل هذا الشيء والسبب؟
 
-![لماذا حصل هذا الهجوم وأسبابه - جدار الحماية المخترق](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_760@21-09-2026_22-32-18.jpg)
+![لماذا حصل هذا الهجوم وأسبابه - جدار الحماية المخترق](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_760@21-09-2025_22-32-18.jpg)
 
 نبدأ من بداية الحدث.. لما ادعى فريق S4uD1PWNZ  السعودي حول انه كروبات عراقية يساند الحوثي او TEAMS يمنية تابعة للحوثي ب اختراق واستهداف مواقع سعودية..
 
@@ -80,7 +80,7 @@ images:
 
 ## 3. الأسباب التقنية والرد العراقي.
 
-![الأسباب التقنية والرد العراقي](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_761@21-09-2026_22-32-18.jpg)
+![الأسباب التقنية والرد العراقي](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_761@21-09-2025_22-32-18.jpg)
 
 الفريقين ما بدأوا الامر بيوم وليلة.. كان الامر من شهور يتم تنفيذه ببساطة المواقع والأنظمة كانت مخترقة من فترة طويلة حسب كلامهم...
 
@@ -116,7 +116,7 @@ images:
 
 ## 4. حجم الدمار الي نتج عنه والاحصائيات الي تم تحصيلها للان.
 
-![نطاق الاختراق ومستوى الأضرار](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_762@21-09-2026_22-32-19.jpg)
+![نطاق الاختراق ومستوى الأضرار](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_762@21-09-2025_22-32-19.jpg)
 
 تم تسريب اكثر من **22 GB** من البيانات.. بعد استخراجها للبيانات حجمها تقريبا **50 GB** او اكثر.
 
@@ -140,7 +140,7 @@ images:
 
 ## 5. مستقبل مجال الأمن السيبراني في العراق
 
-![مستقبل مجال الأمن السيبراني بالعراق](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_763@21-09-2026_22-32-19.jpg)
+![مستقبل مجال الأمن السيبراني بالعراق](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_763@21-09-2025_22-32-19.jpg)
 
 تكشف هذه الهجمات بوضوح عن التحديات الهيكلية التي تواجه واقع الأمن السيبراني في العراق، وتضعنا أمام مراجعة حتمية لمستوى الجاهزية والوعي المؤسسي والمجتمعي.
 

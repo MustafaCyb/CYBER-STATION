@@ -1,23 +1,23 @@
 ---
 title: "Broken Firewall: The Reality of Iraq’s Cyber Attacks & Massive Leaks"
-description: "A comprehensive threat intelligence breakdown of the destructive cyber attacks and massive data leaks targeting Iraqi national infrastructure between September 15–20, 2026—analyzing adversary tactics, root technical vulnerabilities, breach metrics, and the future of cybersecurity in Iraq."
+description: "A comprehensive threat intelligence breakdown of the destructive cyber attacks and massive data leaks targeting Iraqi national infrastructure between September 15–20, 2025—analyzing adversary tactics, root technical vulnerabilities, breach metrics, and the future of cybersecurity in Iraq."
 locale: "en"
-itemSlug: "iraq-cyber-threat-actors-2026"
-date: 2026-09-20
+itemSlug: "iraq-cyber-threat-actors-2025"
+date: 2025-09-20
 tags: ["threat-intelligence", "iraq", "cyber-attacks", "incident-response", "data-leak", "s4ud1pwnz", "cyb3r-drag0nz"]
 category: "Threat Intelligence"
 featured: true
-cover: "images/articles/iraq-cyber-threat-actors-2026/cover.jpg"
+cover: "images/articles/iraq-cyber-threat-actors-2025/cover.jpg"
 images:
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_759@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_759@21-09-2025_22-32-18.jpg"
     alt: "Cyber Attack on Iraq - S4UD1PWNZ and CYB3R DRAG0NZ"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_760@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_760@21-09-2025_22-32-18.jpg"
     alt: "Why this happened and causes"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_761@21-09-2026_22-32-18.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_761@21-09-2025_22-32-18.jpg"
     alt: "Technical reasons and Iraqi response"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_762@21-09-2026_22-32-19.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_762@21-09-2025_22-32-19.jpg"
     alt: "Breach scope and damage level"
-  - src: "images/articles/iraq-cyber-threat-actors-2026/photo_763@21-09-2026_22-32-19.jpg"
+  - src: "images/articles/iraq-cyber-threat-actors-2025/photo_763@21-09-2025_22-32-19.jpg"
     alt: "Iraq's cybersecurity future"
 ---
 
@@ -25,7 +25,7 @@ images:
 
 | Parameter | Details |
 | :--- | :--- |
-| **Attack Timeline** | **September 15, 2026 — September 20, 2026** |
+| **Attack Timeline** | **September 15, 2025 — September 20, 2025** |
 | **Adversary Groups (Threat Actors)** | Joint coalition of **S4uD1PWNZ** and **CYB3R DRAG0NZ** |
 | **Attack Vectors** | Network telemetry system compromise (PRTG), Domain/Subdomain Takeover, unpatched web application vulnerabilities, data exfiltration |
 | **Key Affected Targets** | National PRTG monitoring systems, Iraqi Parliament, Kirkuk Provincial Council, governmental and private universities, Basra Engineers Syndicate |
@@ -35,7 +35,7 @@ images:
 
 ## 1. What Happened in the Previous Days?
 
-![Cyber Attack on Iraq - S4UD1PWNZ and CYB3R DRAG0NZ](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_759@21-09-2026_22-32-18.jpg)
+![Cyber Attack on Iraq - S4UD1PWNZ and CYB3R DRAG0NZ](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_759@21-09-2025_22-32-18.jpg)
 
 Iraq has been subjected to devastating digital attacks targeting sensitive websites and systems across the country by two threat actor groups operating as cybercriminal entities.
 
@@ -55,7 +55,7 @@ This was followed by consecutive intrusions into universities, regional councils
 
 ## 2. Why Did This Happen and What Was the Motive?
 
-![Why this happened and causes - Broken Firewall](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_760@21-09-2026_22-32-18.jpg)
+![Why this happened and causes - Broken Firewall](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_760@21-09-2025_22-32-18.jpg)
 
 To understand this campaign, we must trace back to the initial trigger. The Saudi threat group **S4uD1PWNZ** claimed that Iraqi groups or Yemeni teams affiliated with the Houthis had targeted Saudi web assets.
 
@@ -77,7 +77,7 @@ One notable target was the portal of the **Engineers Syndicate in Basra**, which
 
 ## 3. Technical Root Causes and the Iraqi Response
 
-![Technical Reasons & The Iraqi Response](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_761@21-09-2026_22-32-18.jpg)
+![Technical Reasons & The Iraqi Response](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_761@21-09-2025_22-32-18.jpg)
 
 These intrusions did not materialize overnight. Adversary disclosures indicate that systems and portals had been silently compromised for several months prior to public disclosure.
 
@@ -114,7 +114,7 @@ Simultaneously, unexpected pushback emerged from specific domestic cybersecurity
 
 ## 4. Breach Scope & Damage Statistics
 
-![Breach Scope & Damage Level](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_762@21-09-2026_22-32-19.jpg)
+![Breach Scope & Damage Level](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_762@21-09-2025_22-32-19.jpg)
 
 The adversaries exfiltrated over **22 GB** of compressed archives, ballooning to over **50 GB** once fully uncompressed.
 
@@ -136,7 +136,7 @@ The adversaries exfiltrated over **22 GB** of compressed archives, ballooning to
 
 ## 5. The Future of Cybersecurity in Iraq
 
-![Iraq's Cybersecurity Future](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2026/photo_763@21-09-2026_22-32-19.jpg)
+![Iraq's Cybersecurity Future](/CYBER-STATION/images/articles/iraq-cyber-threat-actors-2025/photo_763@21-09-2025_22-32-19.jpg)
 
 This campaign highlights foundational structural challenges facing Iraq's cybersecurity posture, requiring a sober, objective reassessment of national readiness, technical education, and community alignment.
 

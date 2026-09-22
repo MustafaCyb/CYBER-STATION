@@ -166,9 +166,9 @@ declare module 'astro:content' {
   collection: "articles";
   data: any
 } & { render(): Render[".md"] };
-"ar/iraq-cyber-threat-actors-2026.md": {
-	id: "ar/iraq-cyber-threat-actors-2026.md";
-  slug: "ar/iraq-cyber-threat-actors-2026";
+"ar/iraq-cyber-threat-actors-2025.md": {
+	id: "ar/iraq-cyber-threat-actors-2025.md";
+  slug: "ar/iraq-cyber-threat-actors-2025";
   body: string;
   collection: "articles";
   data: any
@@ -215,9 +215,9 @@ declare module 'astro:content' {
   collection: "articles";
   data: any
 } & { render(): Render[".md"] };
-"en/iraq-cyber-threat-actors-2026.md": {
-	id: "en/iraq-cyber-threat-actors-2026.md";
-  slug: "en/iraq-cyber-threat-actors-2026";
+"en/iraq-cyber-threat-actors-2025.md": {
+	id: "en/iraq-cyber-threat-actors-2025.md";
+  slug: "en/iraq-cyber-threat-actors-2025";
   body: string;
   collection: "articles";
   data: any
